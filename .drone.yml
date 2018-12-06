@@ -1,11 +1,9 @@
-pipeline:
-  build:
-    image: node
-    commands:
-      - npm install
-      - npm test
-  publish:
-    image: plugins/docker
-    repo: drone/node-demo
-    secrets: [ docker_username, docker_password ]
-    dry_run: true # remove this to publish
+kind: pipeline
+name: default
+
+steps:
+- name: test
+  image: node:9.8.0
+  commands:
+  - npm install
+  - npm test
