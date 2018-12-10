@@ -7,3 +7,11 @@ steps:
   commands:
   - npm install
   - npm test
+- name: docker  
+  image: plugins/docker
+  settings:
+    repo: nazmulb/node-microservice
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
