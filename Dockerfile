@@ -1,7 +1,7 @@
 FROM node:9.8.0
-RUN mkdir -p /var/www/node/node_modules
-ADD server.js /var/www/node
-ADD node_modules /var/www/node/node_modules
+RUN mkdir -p /var/www/node
+ADD . /var/www/node
 WORKDIR /var/www/node
+RUN npm install
 CMD [ "node", "server.js" ]
 EXPOSE 3000
