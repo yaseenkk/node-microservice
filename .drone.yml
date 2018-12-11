@@ -2,6 +2,13 @@ kind: pipeline
 name: default
 
 steps:
+- name: start-notify
+  image: plugins/slack
+  settings:
+    webhook: https://hooks.slack.com/services/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
+    channel: cicd
+    template: >
+        Build {{build.number}} of {{build.branch}} started by {{build.author}}. {{build.link}}
 - name: test
   image: node:9.8.0
   commands:
@@ -16,8 +23,15 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-- name: slack
+- name: end-notify
   image: plugins/slack
   settings:
     webhook: https://hooks.slack.com/services/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
     channel: cicd
+    icon_url: https://unsplash.it/256/256/?random
+    template: >
+      {{#success build.status}}
+        Build {{build.number}} of {{build.branch}} successful by {{build.author}}. {{build.link}}
+      {{else}}
+        Build {{build.number}} of {{build.branch}} failed by {{build.author}}. Please fix!. {{build.link}}
+      {{/success}}
