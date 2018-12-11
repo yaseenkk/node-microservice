@@ -24,7 +24,7 @@ steps:
     password:
       from_secret: docker_password
 - name: deploy
-  image: ubuntu:16.04
+  image: docker
   commands:
     - echo hello
     - sh deploy.sh
