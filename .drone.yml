@@ -24,12 +24,12 @@ steps:
     password:
       from_secret: docker_password
 - name: deploy
-    image: appleboy/drone-ssh
-    host: localhost
-    port: 22
-    script:
-      - echo hello
-      - ./deploy.sh
+  image: appleboy/drone-ssh
+  host: localhost
+  port: 22
+  script:
+    - echo hello
+    - ./deploy.sh
 - name: end-notify
   image: plugins/slack
   settings:
