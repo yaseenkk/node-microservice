@@ -27,8 +27,8 @@ steps:
   image: appleboy/drone-ssh
   host: localhost
   username: nazmulbasher
-  password: nurun1
   port: 22
+  secrets: [ ssh_key ]
   script:
     - echo hello
     - ./deploy.sh
