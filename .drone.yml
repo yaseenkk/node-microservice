@@ -7,9 +7,8 @@ steps:
   settings:
     webhook: https://hooks.slack.com/services/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
     channel: cicd
-    link_names: true
     template: >
-        Build {{build.number}} of {{build.branch}} started by {{build.author}}. {{build.link}}
+        Build {{build.number}} of {{build.branch}} started. {{build.link}}
 - name: test
   image: node:9.8.0
   commands:
@@ -31,7 +30,7 @@ steps:
     channel: cicd
     template: >
       {{#success build.status}}
-        Build {{build.number}} of {{build.branch}} successful by {{build.author}}. {{build.link}}
+        Build {{build.number}} of {{build.branch}} successful. {{build.link}}
       {{else}}
-        Build {{build.number}} of {{build.branch}} failed by {{build.author}}. Please fix!. {{build.link}}
+        Build {{build.number}} of {{build.branch}} failed. Please fix!. {{build.link}}
       {{/success}}
