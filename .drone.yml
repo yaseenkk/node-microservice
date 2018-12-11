@@ -16,3 +16,8 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
+- name: slack
+  image: plugins/slack
+  settings:
+    webhook: https://hooks.slack.com/services/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
+    channel: cicd
