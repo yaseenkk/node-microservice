@@ -24,7 +24,8 @@ steps:
     password:
       from_secret: docker_password
 - name: deploy
-  script:
+  image: ubuntu:16.04
+  commands:
     - echo hello
     - ./deploy.sh
 - name: end-notify
