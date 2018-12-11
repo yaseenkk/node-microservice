@@ -7,6 +7,7 @@ steps:
   settings:
     webhook: https://hooks.slack.com/services/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
     channel: cicd
+    link_names: true
     template: >
         Build {{build.number}} of {{build.branch}} started by {{build.author}}. {{build.link}}
 - name: test
@@ -28,7 +29,6 @@ steps:
   settings:
     webhook: https://hooks.slack.com/services/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
     channel: cicd
-    icon_url: https://unsplash.it/256/256/?random
     template: >
       {{#success build.status}}
         Build {{build.number}} of {{build.branch}} successful by {{build.author}}. {{build.link}}
