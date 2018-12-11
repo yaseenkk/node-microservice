@@ -3,5 +3,5 @@ RUN mkdir -p /var/www/node
 ADD . /var/www/node
 WORKDIR /var/www/node
 RUN npm install
-CMD [ "node", "server.js" ]
+CMD npm start
 EXPOSE 3000
