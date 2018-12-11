@@ -24,10 +24,6 @@ steps:
     password:
       from_secret: docker_password
 - name: deploy
-  image: appleboy/drone-ssh
-  host: localhost:8090
-  port: 22
-  secrets: [ ssh_key ]
   script:
     - echo hello
     - ./deploy.sh
