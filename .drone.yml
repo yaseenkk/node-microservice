@@ -25,8 +25,7 @@ steps:
       from_secret: docker_password
 - name: deploy
   image: appleboy/drone-ssh
-  host: 058a6cd6.ngrok.io
-  username: nazmulbasher
+  host: localhost:8090
   port: 22
   secrets: [ ssh_key ]
   script:
