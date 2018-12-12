@@ -12,7 +12,7 @@ steps:
 - name: test
   image: node:9.8.0
   commands:
-    - sh ./.drone/build.sh
+  - sh ./.drone/build.sh
 - name: docker
   image: plugins/docker
   settings:
@@ -25,11 +25,13 @@ steps:
 - name: deploy
   image: docker
   commands:
-    - sh ./.drone/deploy.sh
+  - sh ./.drone/deploy.sh
   volumes:
-    - /var/run/docker.sock:/var/run/docker.sock  
+  - name: docker
+    path: /var/run/docker.sock
 - name: end-notify
   image: plugins/slack
+  detach: true
   settings:
     webhook: https://hooks.slack.com/services/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
     channel: cicd
@@ -39,3 +41,7 @@ steps:
       {{else}}
         Build {{build.number}} of {{build.branch}} failed. Please fix!. {{build.link}}
       {{/success}}
+volumes:
+- name: docker
+  host:
+    path: /var/run/docker.sock      
