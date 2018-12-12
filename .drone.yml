@@ -36,7 +36,6 @@ steps:
     path: /var/run/docker.sock
 - name: end-notify
   image: plugins/slack
-  detach: true
   settings:
     webhook: https://hooks.slack.com/services/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
     channel: cicd
