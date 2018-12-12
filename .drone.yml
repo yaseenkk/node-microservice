@@ -9,11 +9,11 @@ steps:
     channel: cicd
     template: >
         Build {{build.number}} of {{build.branch}} started. {{build.link}}
-- name: test
+- name: build
   image: node:9.8.0
   commands:
   - sh ./.drone/build.sh
-- name: docker
+- name: publish
   image: plugins/docker
   settings:
     repo: nazmulb/node-microservice
@@ -22,6 +22,11 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
+  when:
+    branch:
+    - master
+    - develop
+    - feature/*    
 - name: deploy
   image: docker
   commands:
