@@ -12,8 +12,7 @@ steps:
 - name: test
   image: node:9.8.0
   commands:
-  - npm install
-  - npm test
+    - sh ./.drone/build.sh
 - name: docker
   image: plugins/docker
   settings:
@@ -26,7 +25,9 @@ steps:
 - name: deploy
   image: docker
   commands:
-    - sh deploy.sh
+    - sh ./.drone/deploy.sh
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock  
 - name: end-notify
   image: plugins/slack
   settings:
