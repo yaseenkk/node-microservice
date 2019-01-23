@@ -28,7 +28,7 @@ jobs:
           root: ~/app
           paths:
             - .
-test:
+  test:
     executor: node
     steps:
       - attach_workspace:
