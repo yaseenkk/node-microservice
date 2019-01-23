@@ -39,7 +39,7 @@ jobs:
       - run:
           name: Save test results
           command: |
-            mocha -R spec spec.js
+            npm test
           environment:
             MOCHA_FILE: ~/reports/test-results.xml
           when: always
