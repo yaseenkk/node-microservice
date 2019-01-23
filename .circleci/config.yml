@@ -41,7 +41,7 @@ jobs:
           command: |
             npm install mocha-junit-reporter
             mkdir -p ~/reports/
-            ./node_modules/.bin/mocha spec spec.js --reporter mocha-junit-reporter
+            ./node_modules/.bin/mocha -R spec spec.js --reporter mocha-junit-reporter
           environment:
             MOCHA_FILE: ~/reports/test-results.xml
           when: always
