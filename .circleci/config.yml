@@ -36,7 +36,7 @@ jobs:
       - run:
           name: Test Server
           command: |
-            curl http://localhost | grep "ok"
+            curl http://localhost:3000/ | grep "ok"
       - run:
           name: Test
           command: npm test
