@@ -41,7 +41,7 @@ jobs:
           command: |
             npm install nyc mocha-junit-reporter
             mkdir reports
-            ./node_modules/.bin/nyc ./node_modules/.bin/mocha --recursive --timeout=10000 --exit --reporter mocha-junit-reporter --reporter-options mochaFile=reports/mocha/test-results.xml
+            ./node_modules/.bin/nyc ./node_modules/.bin/mocha spec.js --recursive --timeout=10000 --exit --reporter mocha-junit-reporter --reporter-options mochaFile=reports/mocha/test-results.xml
           environment:
             MOCHA_FILE: ./reports/test-results.xml
           when: always
