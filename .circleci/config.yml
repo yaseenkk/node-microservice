@@ -39,9 +39,7 @@ jobs:
       - run:
           name: Save test results
           command: |
-            npm install mocha-junit-reporter
-            mkdir -p ~/reports/
-            mocha test --reporter mocha-junit-reporter
+            mocha -R spec spec.js
           environment:
             MOCHA_FILE: ~/reports/test-results.xml
           when: always
