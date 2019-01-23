@@ -41,7 +41,7 @@ jobs:
           command: |
             npm install mocha-junit-reporter
             mkdir -p ~/reports/
-            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/reports/ \;
+            mocha test --reporter mocha-junit-reporter
           environment:
             MOCHA_FILE: ~/reports/test-results.xml
           when: always
