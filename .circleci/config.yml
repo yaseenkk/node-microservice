@@ -36,6 +36,19 @@ jobs:
       - run:
           name: Test
           command: npm test
+      - run:
+          name: Save test results
+          command: |
+            npm install mocha-junit-reporter
+            mkdir -p ~/reports/
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/reports/ \;
+          environment:
+            MOCHA_FILE: ~/reports/test-results.xml
+          when: always
+      - store_test_results:
+          path: ~/reports
+      - store_artifacts:
+          path: ~/reports
 workflows:
   version: 2
   build_and_test:
