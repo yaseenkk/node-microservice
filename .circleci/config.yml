@@ -8,7 +8,6 @@ executors:
     shell: /bin/bash
     working_directory: ~/app
     environment:
-      TEST_REPORTS: ~/reports
       SLACK_WEBHOOK: https://hooks.slack.com/services/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
 jobs:
   build:
@@ -44,17 +43,16 @@ jobs:
       - run:
           name: Save test results
           command: |
-            set -xu
             npm install nyc mocha-junit-reporter
-            mkdir ${TEST_REPORTS}
-            ./node_modules/.bin/nyc ./node_modules/.bin/mocha spec.js --recursive --timeout=10000 --exit --reporter mocha-junit-reporter --reporter-options mochaFile=${TEST_REPORTS}/mocha/test-results.xml
+            mkdir ~/reports
+            ./node_modules/.bin/nyc ./node_modules/.bin/mocha spec.js --recursive --timeout=10000 --exit --reporter mocha-junit-reporter --reporter-options mochaFile=~/reports/mocha/test-results.xml
           environment:
-            MOCHA_FILE: ${TEST_REPORTS}/test-results.xml
+            MOCHA_FILE: ~/reports/test-results.xml
           when: always
       - store_test_results:
-          path: ${TEST_REPORTS}
+          path: ~/reports
       - store_artifacts:
-          path: ${TEST_REPORTS}
+          path: ~/reports
 workflows:
   version: 2
   build_and_test:
