@@ -1,12 +1,12 @@
 version: 2.1
+orbs:
+  slack: circleci/slack@volatile
 executors:
   node:
     docker:
       - image: 'circleci/node:9.8.0'
     shell: /bin/bash
     working_directory: ~/app
-orbs:
-  slack: circleci/slack@volatile
 jobs:
   build:
     executor: node
@@ -58,15 +58,15 @@ workflows:
       - build:
           pre-steps:
             - slack/notify:
-              message: Build of ${CIRCLE_BRANCH} started.
-              color: '#42e2f4'
-              webhook: https://hooks.slack.com/services/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
+                message: Build of ${CIRCLE_BRANCH} started.
+                color: '#42e2f4'
+                webhook: https://hooks.slack.com/services/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
       - test:
           post-steps:
             - slack/notify:
-              message: Build of ${CIRCLE_BRANCH} successful.
-              color: '#008000'
-              webhook: https://hooks.slack.com/services/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
-              when: on_success
+                message: Build of ${CIRCLE_BRANCH} successful.
+                color: '#008000'
+                webhook: https://hooks.slack.com/services/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
+                when: on_success
           requires:
             - build
