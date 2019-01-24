@@ -44,6 +44,7 @@ jobs:
       - run:
           name: Save test results
           command: |
+            set -xu
             npm install nyc mocha-junit-reporter
             mkdir ${TEST_REPORTS}
             ./node_modules/.bin/nyc ./node_modules/.bin/mocha spec.js --recursive --timeout=10000 --exit --reporter mocha-junit-reporter --reporter-options mochaFile=${TEST_REPORTS}/mocha/test-results.xml
