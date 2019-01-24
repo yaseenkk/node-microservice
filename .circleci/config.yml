@@ -7,6 +7,9 @@ executors:
       - image: 'circleci/node:9.8.0'
     shell: /bin/bash
     working_directory: ~/app
+    environment:
+      TEST_REPORTS: ~/reports
+      SLACK_WEBHOOK: https://hooks.slack.com/services/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
 jobs:
   build:
     executor: node
@@ -42,15 +45,15 @@ jobs:
           name: Save test results
           command: |
             npm install nyc mocha-junit-reporter
-            mkdir ~/reports
-            ./node_modules/.bin/nyc ./node_modules/.bin/mocha spec.js --recursive --timeout=10000 --exit --reporter mocha-junit-reporter --reporter-options mochaFile=~/reports/mocha/test-results.xml
+            mkdir ${TEST_REPORTS}
+            ./node_modules/.bin/nyc ./node_modules/.bin/mocha spec.js --recursive --timeout=10000 --exit --reporter mocha-junit-reporter --reporter-options mochaFile=${TEST_REPORTS}/mocha/test-results.xml
           environment:
-            MOCHA_FILE: ~/reports/test-results.xml
+            MOCHA_FILE: ${TEST_REPORTS}/test-results.xml
           when: always
       - store_test_results:
-          path: ~/reports
+          path: ${TEST_REPORTS}
       - store_artifacts:
-          path: ~/reports
+          path: ${TEST_REPORTS}
 workflows:
   version: 2
   build_and_test:
@@ -60,7 +63,7 @@ workflows:
             - slack/notify:
                 message: Build of ${CIRCLE_BRANCH} started.
                 color: '#42e2f4'
-                webhook: https://hooks.slack.com/services/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
+                webhook: ${SLACK_WEBHOOK}
       - test:
           post-steps:
             - slack/status:
