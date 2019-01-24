@@ -63,10 +63,10 @@ workflows:
                 webhook: https://hooks.slack.com/services/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
       - test:
           post-steps:
-            - slack/notify:
-                message: Build of ${CIRCLE_BRANCH} successful.
-                color: '#008000'
+            - slack/status:
+                fail_only: 'true' # If 'true', notifications successful jobs will not be sent.
+                #message: Build of ${CIRCLE_BRANCH} successful.
+                #color: '#008000'
                 webhook: https://hooks.slack.com/services/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
-                when: on_success
           requires:
             - build
