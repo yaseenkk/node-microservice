@@ -17,9 +17,9 @@ describe('loading express', function () {
         .expect(200, done);
     });
     
-    it('404 everything else', function testPath(done) {
+    it('200 everything else', function testPath(done) {
       request(server)
         .get('/foo/bar')
-        .expect(404, done);
+        .expect(200, done);
     });
 });
