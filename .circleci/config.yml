@@ -66,6 +66,6 @@ workflows:
       - test:
           post-steps:
             - slack/status:
-                webhook: https://hooks.slack.com/services/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
+                webhook: ${SLACK_WEBHOOK}
           requires:
             - build
