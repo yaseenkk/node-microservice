@@ -1,6 +1,4 @@
 version: 2.1
-orbs:
-  slack: circleci/slack@volatile
 executors:
   node:
     docker:
@@ -9,6 +7,11 @@ executors:
     working_directory: ~/app
     environment:
       SLACK_WEBHOOK: https://hooks.slack.com/services/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
+   
+orbs:
+  slack: circleci/slack@volatile
+  docker-publish: circleci/docker-publish@0.1.4
+
 jobs:
   build:
     executor: node
@@ -32,6 +35,7 @@ jobs:
           root: ~/app
           paths:
             - .
+
   test:
     executor: node
     steps:
@@ -53,6 +57,17 @@ jobs:
           path: ~/reports
       - store_artifacts:
           path: ~/reports
+  
+  publish:
+      executor: docker-publish/docker
+      steps:
+        - attach_workspace:
+            at: ~/app
+        - setup_remote_docker
+        - docker-publish/check
+        - docker-publish/build
+        - docker-publish/deploy
+
 workflows:
   version: 2
   build_and_test:
@@ -69,3 +84,9 @@ workflows:
                 webhook: ${SLACK_WEBHOOK}
           requires:
             - build
+      - publish:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
