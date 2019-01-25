@@ -102,13 +102,13 @@ workflows:
             - test
           filters:
             branches:
-              only: master
+              only: develop
       - deploy:
           post-steps:
             - slack/status:
                 webhook: ${SLACK_WEBHOOK}
           requires:
-            - publish
+            - test
           filters:
             branches:
               only: master
