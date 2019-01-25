@@ -78,6 +78,10 @@ jobs:
             name: Deploy
             command: |
               sh ./.circleci/deploy.sh
+        - run:
+            name: Test deployment
+            command: |
+              curl http://localhost:7777 | grep "ok"
 
 workflows:
   version: 2
