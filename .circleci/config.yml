@@ -59,7 +59,7 @@ jobs:
           path: ~/reports
   
   publish:
-      executor: docker-publish/docker
+      executor: node
       steps:
         - attach_workspace:
             at: ~/app
@@ -79,12 +79,12 @@ workflows:
                 color: '#42e2f4'
                 webhook: ${SLACK_WEBHOOK}
       - test:
-          post-steps:
-            - slack/status:
-                webhook: ${SLACK_WEBHOOK}
           requires:
             - build
       - publish:
+          post-steps:
+            - slack/status:
+                webhook: ${SLACK_WEBHOOK}
           requires:
             - test
           filters:
