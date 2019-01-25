@@ -104,7 +104,7 @@ workflows:
             - slack/status:
                 webhook: ${SLACK_WEBHOOK}
           requires:
-            - test
+            - publish
           filters:
             branches:
               only: master
