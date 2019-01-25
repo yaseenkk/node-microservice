@@ -91,7 +91,7 @@ workflows:
                 webhook: ${SLACK_WEBHOOK}
           filters:
             branches:
-              only: develop
+              only: master
       - test:
           requires:
             - build
