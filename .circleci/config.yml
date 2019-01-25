@@ -77,9 +77,7 @@ jobs:
         - run:
             name: Deploy
             command: |
-              ls -la
-              pwd
-              ./deploy.sh
+              ./.circleci/deploy.sh
 
 workflows:
   version: 2
