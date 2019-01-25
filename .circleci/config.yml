@@ -79,11 +79,6 @@ jobs:
             name: Deploy
             command: |
               sh ./.circleci/deploy.sh
-        - run:
-            name: Test deployment
-            command: |
-              set -e
-              curl http://localhost:7777 | grep "ok"
 
 workflows:
   version: 2
@@ -103,7 +98,7 @@ workflows:
             - test
           filters:
             branches:
-              only: develop
+              only: master
       - deploy:
           post-steps:
             - slack/status:
