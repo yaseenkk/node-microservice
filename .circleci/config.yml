@@ -74,6 +74,7 @@ jobs:
       steps:
         - attach_workspace:
             at: ~/app
+        - setup_remote_docker
         - run:
             name: Deploy
             command: |
