@@ -69,6 +69,13 @@ jobs:
             tag: latest
         - docker-publish/deploy # It would publish the images to docker hub.
 
+  deploy:
+      executor: node
+      steps:
+        - attach_workspace:
+            at: ~/app
+        - run: ./deploy.sh
+
 workflows:
   version: 2
   build_and_test:
@@ -83,11 +90,17 @@ workflows:
           requires:
             - build
       - publish:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
+      - deploy:
           post-steps:
             - slack/status:
                 webhook: ${SLACK_WEBHOOK}
           requires:
-            - test
+            - publish
           filters:
             branches:
               only: master
