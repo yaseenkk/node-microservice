@@ -74,7 +74,10 @@ jobs:
       steps:
         - attach_workspace:
             at: ~/app
-        - run: ./deploy.sh
+        - run:
+            name: Deploy
+            command: |
+              ./deploy.sh
 
 workflows:
   version: 2
