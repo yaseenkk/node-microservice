@@ -82,7 +82,7 @@ jobs:
         - run:
             name: Test deployment
             command: |
-              set -o errexit
+              set -e
               curl http://localhost:7777 | grep "ok"
 
 workflows:
