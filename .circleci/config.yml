@@ -91,7 +91,7 @@ workflows:
                 webhook: ${SLACK_WEBHOOK}
           filters:
             branches:
-              only: master
+              only: develop
       - test:
           requires:
             - build
@@ -108,8 +108,6 @@ workflows:
           post-steps:
             - slack/status:
                 webhook: ${SLACK_WEBHOOK}
-          requires:
-            - publish
           filters:
             branches:
               only: master
