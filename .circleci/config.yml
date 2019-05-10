@@ -43,7 +43,7 @@ jobs:
             mkdir ~/reports
             ./node_modules/.bin/nyc ./node_modules/.bin/mocha spec.js --recursive --timeout=10000 --exit --reporter mocha-junit-reporter --reporter-options mochaFile=~/reports/mocha/test-results.xml
           environment:
-            MOCHA_FILE: ~/reports/test-results.xml
+            MOCHA_FILE: ~/reports/mocha/test-results.xml
           when: always
       - store_test_results:
           path: ~/reports
