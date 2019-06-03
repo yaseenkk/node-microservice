@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -ex
 
 npm start &
 sleep 1
