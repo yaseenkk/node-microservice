@@ -12,8 +12,10 @@ steps:
   image: plugins/docker
   settings:
     repo: nishanthkp/nodeapp
-    auto_tag: true
+    tags: ["commit_${DRONE_COMMIT}","build_${DRONE_BUILD_NUMBER}", "latest"]
+    # auto_tag: true
     username:
       from_secret: DOCKER_USERNAME
     password:
       from_secret: DOCKER_PASSWORD
+  
