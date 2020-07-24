@@ -2,14 +2,24 @@ kind: pipeline
 name: default
 
 steps:
-
+#Build Way 1
 - name: build
   image: node:9.8.0
+  pull: if-not-exists
   commands:
-  - sh ./.drone/build.sh
+  - npm install
+  - npm test
+
+#Build Way 2
+# - name: build
+#   image: node:9.8.0
+#   pull: if-not-exists
+#   commands:
+#   - sh ./.drone/build.sh
 
 - name: publish
-  image: plugins/docker
+  image: plugins/docker:latest
+  pull: if-not-exists
   settings:
     repo: nishanthkp/node-microservice
     tags: ["build_${DRONE_BUILD_NUMBER}", "latest"]
@@ -20,4 +30,3 @@ steps:
       from_secret: DOCKERHUB_USERNAME
     password:
       from_secret: DOCKERHUB_PASSWORD
-  
