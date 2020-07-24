@@ -11,11 +11,13 @@ steps:
 - name: publish
   image: plugins/docker
   settings:
-    repo: nishanthkp/nodeapp
-    tags: ["commit_${DRONE_COMMIT}","build_${DRONE_BUILD_NUMBER}", "latest"]
-    # auto_tag: true
+    repo: nishanthkp/node-microservice
+    tags: ["build_${DRONE_BUILD_NUMBER}", "latest"]
+    when:
+      branch: master
+      event: commit
     username:
-      from_secret: DOCKER_USERNAME
+      from_secret: DOCKERHUB_USERNAME
     password:
-      from_secret: DOCKER_PASSWORD
+      from_secret: DOCKERHUB_PASSWORD
   
