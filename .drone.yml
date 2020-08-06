@@ -33,5 +33,10 @@ steps:
 
 - name: deploy
   image: widerin/openshift-cli
+  pull: if-not-exists
   commands:
-  - oc version
+  - oc login --token="$OPENSHIFT_TOKEN" --server="$OPENSHIFT_SERVER"
+  - oc project danske-training
+  - oc new-app nishanthkp/node-microservice:latest --name=node-microservice-nishanth
+  
+
