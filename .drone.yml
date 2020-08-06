@@ -29,4 +29,9 @@ steps:
     username:
       from_secret: DOCKERHUB_USERNAME
     password:
-      from_secret: DOCKERHUB_PASSWORD
+      from_secret: DOCKERHUB_PASSWORD 
+
+- name: deploy
+  image: widerin/openshift-cli
+  commands:
+  - oc version
