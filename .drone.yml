@@ -35,8 +35,6 @@ steps:
   image: widerin/openshift-cli
   pull: if-not-exists
   commands:
-  - echo $OPENSHIFT_SERVER
-  - echo $OPENSHIFT_TOKEN 
-  - oc login --token=$OPENSHIFT_TOKEN --server=$OPENSHIFT_SERVER
+  - oc login --token=$OPENSHIFT_TOKEN --server=https://api.ca-central-1.starter.openshift-online.com:6443
   - oc project danske-training
   - oc new-app nishanthkp/node-microservice:latest --name=node-microservice-nishanth
