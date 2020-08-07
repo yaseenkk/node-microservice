@@ -21,8 +21,8 @@ steps:
   image: plugins/docker:latest
   pull: if-not-exists
   settings:
-    repo: nishanthkp/node-microservice
-    tags: ["build_${DRONE_BUILD_NUMBER}", "latest"]
+    repo: yaseenkk/node-microservice
+    tags: ["yaseenkk"]
     when:
       branch: master
       event: commit
@@ -36,8 +36,8 @@ steps:
   pull: if-not-exists
   commands:
   - oc login --token=$OPENSHIFT_TOKEN --server=$OPENSHIFT_SERVER
-  - oc project danske-training
-  - oc new-app nishanthkp/node-microservice:latest --name=node-microservice-nishanth
+  - oc project devops
+  - oc new-app yaseenkk/node-microservice:yaseenkk --name=node-microservice-yaseenkk
   environment:
     OPENSHIFT_TOKEN:
       from_secret: OPENSHIFT_TOKEN
